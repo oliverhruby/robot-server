@@ -1,6 +1,6 @@
 {
   "name": "robot",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Robot API Server",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,6 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "i2c": "^0.2.3",
-    "i2c-bus": "^1.2.2",
     "os": "^0.1.1",
     "sqlite3": "^3.1.8",
     "ws": "^3.1.0"

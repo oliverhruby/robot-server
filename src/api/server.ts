@@ -10,9 +10,8 @@ import * as sqlite3 from 'sqlite3';
 import * as ws from 'ws';
 // import * as jwt from 'jsonwebtoken';
 import { Log } from './services/log';
-import { TRex } from './services/trex';
-// import { scenesRouter } from './routes/scenes';
-// import { usersRouter } from './routes/users';
+import { TRexService } from './services/trex.service';
+// import { trexRouter } from './routes/trex';
 // import { MessageSocket } from './sockets';
 
 /**
@@ -72,14 +71,23 @@ export class Server {
     router = express.Router();
 
     // Add routers
-    // this.app.use('/api/scenes', scenesRouter);
-    // this.app.use('/api/users', usersRouter);
+    // this.app.use('/api/trex', trexRouter);
 
     // Handle GET for the root URL
     this.app.get('/api', (req: Request, res: Response) => {
       res.send('API works!');
-      let trex = new TRex();
-      chalk.bgYellow('Response: ' + trex.GetStatus());
+    });
+
+    this.app.get('/api/status', (req: Request, res: Response) => {
+      let trexService = new TRexService();
+      trexService.getStatus()
+      res.send('Status updated');
+    });
+
+     this.app.get('/api/command', (req: Request, res: Response) => {
+      let trexService = new TRexService();
+      trexService.sendCommand(200, 200);
+      res.send('Command sent');
     });
 
     // Point static path to dist
@@ -90,7 +98,7 @@ export class Server {
       resp.send('{\n' +
         '  "nodejs": "' + process.version + '",\n' +
         '  "os": {\n' +
-        '    "freememb": "' + os.freemem() + '",\n' +
+        '    "freemem": "' + os.freemem() + '",\n' +
         '    "hostname": "' + os.hostname() + '",\n' +
         '    "platform": "' + os.platform() + '",\n' +
         '    "release": "' + os.release() + '",\n' +
