@@ -12,7 +12,7 @@ import * as ws from 'ws';
 import { Log } from './services/log';
 import { TRexService } from './services/trex.service';
 // import { trexRouter } from './routes/trex';
-// import { MessageSocket } from './sockets';
+import { MessageSocket } from './sockets/message.socket';
 
 /**
  * Backend server functionality wrapped as a class
@@ -148,7 +148,7 @@ export class Server {
    * Configure sockets
    */
   private sockets(): void {
-    // let messageSocket = new MessageSocket({server: this.server});
+    let socket = new MessageSocket({server: this.server});
   }
 
   /**
