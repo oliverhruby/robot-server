@@ -80,11 +80,10 @@ export class Server {
 
     this.app.get('/api/status', (req: Request, res: Response) => {
       let trexService = new TRexService();
-      trexService.getStatus()
-      res.send('Status updated');
+      let status = trexService.getStatus().then(data => res.send(data));
     });
 
-     this.app.get('/api/command', (req: Request, res: Response) => {
+    this.app.get('/api/command', (req: Request, res: Response) => {
       let trexService = new TRexService();
       trexService.sendCommand(200, 200);
       res.send('Command sent');

@@ -1,4 +1,6 @@
-import { TRexStatus } from '../models/trexstatus';
+import {
+    TRexStatus
+} from '../models/trexstatus';
 
 const i2c: any = require('i2c');
 
@@ -12,7 +14,7 @@ export class TRexService {
 
     private wire: any;
     private status: TRexStatus;
-    
+
     /**
      * Initialize the communication
      */
@@ -67,27 +69,28 @@ export class TRexService {
      */
     getStatus() {
         let me = this;
-        this.wire.read(STATUS_PACKET_SIZE, function (err: any, buffer: any) {
-            if (err) {
-                console.log(err);
-            } else {
-                let start = buffer[0]
-                let error = buffer[1];
-                
-                let status = new TRexStatus();
-                status.voltage = ((buffer[2] * 256) + buffer[3]) / 100.0;
-                status.lmCurrent = ((buffer[4] * 256) + buffer[5]) / 100.0;
-                status.rmCurrent = ((buffer[8] * 256) + buffer[9]) / 100.0;
-                status.accX = ((buffer[12] * 256) + buffer[13]) / 100.0;
-                status.accY = ((buffer[14] * 256) + buffer[15]) / 100.0;
-                status.accZ = ((buffer[16] * 256) + buffer[17]) / 100.0;
-                status.impactX = ((buffer[18] * 256) + buffer[19]) / 100.0;
-                status.impactY = ((buffer[20] * 256) + buffer[21]) / 100.0;
-                status.impactZ = ((buffer[22] * 256) + buffer[23]) / 100.0;
-                me.status = status;
+        return new Promise((resolve, reject) => {
+            this.wire.read(STATUS_PACKET_SIZE, function (err: any, buffer: any) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    let start = buffer[0]
+                    let error = buffer[1];
 
-                console.log(status.toString());
-            }
+                    let status = new TRexStatus();
+                    status.voltage = ((buffer[2] * 256) + buffer[3]) / 100.0;
+                    status.lmCurrent = ((buffer[4] * 256) + buffer[5]) / 100.0;
+                    status.rmCurrent = ((buffer[8] * 256) + buffer[9]) / 100.0;
+                    status.accX = ((buffer[12] * 256) + buffer[13]) / 100.0;
+                    status.accY = ((buffer[14] * 256) + buffer[15]) / 100.0;
+                    status.accZ = ((buffer[16] * 256) + buffer[17]) / 100.0;
+                    status.impactX = ((buffer[18] * 256) + buffer[19]) / 100.0;
+                    status.impactY = ((buffer[20] * 256) + buffer[21]) / 100.0;
+                    status.impactZ = ((buffer[22] * 256) + buffer[23]) / 100.0;
+                    me.status = status;
+                    resolve(status);
+                }
+            });
         });
     }
 }
