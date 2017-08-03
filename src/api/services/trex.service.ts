@@ -59,8 +59,8 @@ export class TRexService {
             255, // lowbat low byte
             7, // I²C address 0-127,
             0 // clock frequency – 0=100kHz 1=400kHz
-        ], function (data: any) {
-
+        ], function (err: any) {
+            if(err) console.log(err);
         });
     }
 
@@ -70,6 +70,18 @@ export class TRexService {
     getStatus() {
         let me = this;
         return new Promise((resolve, reject) => {
+            // DEBUG
+            let status = new TRexStatus();
+            status.accX = 0;
+            status.accY = 0;
+            status.accZ = 0;
+            status.impactX = 0;
+            status.impactY = 0;
+            status.impactZ = 0;
+            status.lmCurrent = 10;
+            status.rmCurrent = 10;
+            resolve(status);
+            /*
             this.wire.read(STATUS_PACKET_SIZE, function (err: any, buffer: any) {
                 if (err) {
                     console.log(err);
@@ -90,7 +102,7 @@ export class TRexService {
                     me.status = status;
                     resolve(status);
                 }
-            });
+            });*/
         });
     }
 }

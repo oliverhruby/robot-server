@@ -1,33 +1,35 @@
 import { BaseSocket } from './base.socket';
 import { Log } from '../services/log';
-import * as chalk from 'chalk';
-import * as url from 'url';
 import * as ws from 'ws';
 import { IncomingMessage } from 'http';
+import { TRexService } from "../services/trex.service";
+import { CvService } from "../services/cv.service";
 
 /**
  * Socket controller for the main application chat
  */
 export class MessageSocket extends BaseSocket {
 
-   constructor(config: any) {
+  private trex = new TRexService();
+
+  constructor(config: any) {
     super(config);
-    this.socket.on('connection', (ws: ws, request: IncomingMessage) => {
-      this.clients++;
+  }
 
-      let location = url.parse(request.url, true);
-      Log.info('SOCKET', 'Socket connection #' + this.clients);
+  onMessage(message: any) {
+    super.onMessage(message);
 
-      ws.on('message', (message: any) => {
-        Log.info('SOCKET', 'Socket message: ' + chalk.gray(message));
-      });
-
-      let me = this;
-      ws.on('close', function(reasonCode: any, description: any) {
-        Log.info('SOCKET', 'Peer #' + me.clients + ' disconnected.');
-        me.clients--;
-      });
-    });
+    // TODO: some command routing pattern?
+    if (message == 'forward') {
+      this.trex.sendCommand(50, 50);
+    } else if (message == 'stop') {
+      this.trex.sendCommand(0, 0);
+    } else if (message == 'left') {
+      this.trex.sendCommand(50, 0);
+    } else if (message == 'right') {
+      this.trex.sendCommand(0, 50);
+    } else if (message == 'photo') {
+      CvService.readCamera();
+    }
   }
 }
-
