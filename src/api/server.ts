@@ -8,9 +8,8 @@ import * as os from 'os';
 import * as path from 'path';
 import * as sqlite3 from 'sqlite3';
 import * as ws from 'ws';
-// import * as jwt from 'jsonwebtoken';
 import { Log } from './services/log';
-import { TRexService } from './services/trex.service';
+// import { TRexService } from './services/trex.service';
 // import { trexRouter } from './routes/trex';
 import { MessageSocket } from './sockets/message.socket';
 
@@ -78,16 +77,16 @@ export class Server {
       res.send('API works!');
     });
 
-    this.app.get('/api/status', (req: Request, res: Response) => {
-      let trexService = new TRexService();
-      let status = trexService.getStatus().then(data => res.send(data));
-    });
+    //this.app.get('/api/status', (req: Request, res: Response) => {
+    //  let trexService = new TRexService();
+    //  let status = trexService.getStatus().then(data => res.send(data));
+    //});
 
-    this.app.get('/api/command', (req: Request, res: Response) => {
-      let trexService = new TRexService();
-      trexService.sendCommand(200, 200);
-      res.send('Command sent');
-    });
+    //this.app.get('/api/command', (req: Request, res: Response) => {
+    //  let trexService = new TRexService();
+    //  trexService.sendCommand(200, 200);
+    //  res.send('Command sent');
+    //});
 
     // Point static path to dist
     this.app.use(express.static(path.join(__dirname, '../../dist')));

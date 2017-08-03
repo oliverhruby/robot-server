@@ -1,6 +1,5 @@
-import {
-    TRexStatus
-} from '../models/trexstatus';
+import { TRexStatus } from '../models/trexstatus';
+import { Log } from "./log";
 
 const i2c: any = require('i2c');
 
@@ -32,33 +31,33 @@ export class TRexService {
      */
     sendCommand(lmSpeed: number, rmSpeed: number) {
         this.wire.write([
-            15, // Start byte – must be 0x0F (15 decimal)
-            6, // PWM frequency – a number from 1 to 7 to select motor PWM frequency
-            0, // Left motor speed high byte
-            lmSpeed, // Left motor speed low byte
-            0, // Left motor brake – 0=brake off 1=brake on
-            0, // Right motor speed high byte
-            rmSpeed, // Right motor speed low byte
-            0, // Right motor brake – 0=brake off 1=brake on
-            0, // Servo 0 position high byte
-            0, // Servo 0 position low byte
-            0, // Servo 1 position high byte
-            0, // Servo 1 position low byte
-            0, // Servo 2 position high byte
-            0, // Servo 2 position low byte
-            0, // Servo 3 position high byte
-            0, // Servo 3 position low byte
-            0, // Servo 4 position high byte
-            0, // Servo 4 position low byte
-            0, // Servo 5 position high byte
-            0, // Servo 5 position low byte
-            50, // Accelerometer de-vibrate 0-255 default=50,
-            0, // Impact sensitivity high byte
-            0, // Impact sensitivity low byte
-            255, // lowbat high byte
-            255, // lowbat low byte
-            7, // I²C address 0-127,
-            0 // clock frequency – 0=100kHz 1=400kHz
+            15,         // Start byte – must be 0x0F (15 decimal)
+            6,          // PWM frequency – a number from 1 to 7 to select motor PWM frequency
+            0,          // Left motor speed high byte
+            lmSpeed,    // Left motor speed low byte
+            0,          // Left motor brake – 0=brake off 1=brake on
+            0,          // Right motor speed high byte
+            rmSpeed,    // Right motor speed low byte
+            0,          // Right motor brake – 0=brake off 1=brake on
+            0,          // Servo 0 position high byte
+            0,          // Servo 0 position low byte
+            0,          // Servo 1 position high byte
+            0,          // Servo 1 position low byte
+            0,          // Servo 2 position high byte
+            0,          // Servo 2 position low byte
+            0,          // Servo 3 position high byte
+            0,          // Servo 3 position low byte
+            0,          // Servo 4 position high byte
+            0,          // Servo 4 position low byte
+            0,          // Servo 5 position high byte
+            0,          // Servo 5 position low byte
+            50,         // Accelerometer de-vibrate 0-255 default=50,
+            0,          // Impact sensitivity high byte
+            0,          // Impact sensitivity low byte
+            2,          // lowbat high byte 5.5V => 550 => 0x226 => 2
+            38,         // lowbat low byte 5.5V => 550 => 0x226 => 38 
+            7,          // I²C address 0-127,
+            0           // clock frequency – 0=100kHz 1=400kHz
         ], function (err: any) {
             if(err) console.log(err);
         });
@@ -71,7 +70,7 @@ export class TRexService {
         let me = this;
         return new Promise((resolve, reject) => {
             // DEBUG
-            let status = new TRexStatus();
+            /* let status = new TRexStatus();
             status.accX = 0;
             status.accY = 0;
             status.accZ = 0;
@@ -81,15 +80,16 @@ export class TRexService {
             status.lmCurrent = 10;
             status.rmCurrent = 10;
             resolve(status);
-            /*
+            */
             this.wire.read(STATUS_PACKET_SIZE, function (err: any, buffer: any) {
                 if (err) {
-                    console.log(err);
+                    Log.error("TRexService", err);
                 } else {
                     let start = buffer[0]
                     let error = buffer[1];
 
                     let status = new TRexStatus();
+                    status.error = buffer[1];
                     status.voltage = ((buffer[2] * 256) + buffer[3]) / 100.0;
                     status.lmCurrent = ((buffer[4] * 256) + buffer[5]) / 100.0;
                     status.rmCurrent = ((buffer[8] * 256) + buffer[9]) / 100.0;
@@ -100,9 +100,10 @@ export class TRexService {
                     status.impactY = ((buffer[20] * 256) + buffer[21]) / 100.0;
                     status.impactZ = ((buffer[22] * 256) + buffer[23]) / 100.0;
                     me.status = status;
+                    Log.info("TRexService", status.toString());
                     resolve(status);
                 }
-            });*/
+            });
         });
     }
 }
