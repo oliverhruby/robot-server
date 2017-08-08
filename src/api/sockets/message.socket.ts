@@ -1,3 +1,4 @@
+import * as child from 'child_process';
 import { BaseSocket } from './base.socket';
 import { Log } from '../services/log';
 import * as ws from 'ws';
@@ -31,7 +32,14 @@ export class MessageSocket extends BaseSocket {
     } else if (action.action == 'status') {
       this.trexService.getStatus().then();
     } else if (action.action == 'photo') {
-      CvService.readCamera();
+      //CvService.readCamera();
+      const p = child.spawn('pwd');
+      p.stdout.on('data', (data) => {
+        console.log(`child stdout:\n${data}`);
+      });
+      p.stderr.on('data', (data) => {
+        console.error(`child stderr:\n${data}`);
+      });   
     }
   }
 }
