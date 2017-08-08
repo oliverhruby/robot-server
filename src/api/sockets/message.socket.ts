@@ -6,6 +6,7 @@ import { IncomingMessage } from 'http';
 import { TRexService } from "../services/trex.service";
 import { CvService } from "../services/cv.service";
 import { SpeechService } from '../services/speech.service';
+import { MotorsCommand } from "../commands/motors.command";
 
 /**
  * Socket controller for the main application chat
@@ -26,6 +27,8 @@ export class MessageSocket extends BaseSocket {
 
     // TODO: some command routing pattern?
     if (action.action == 'motors') {
+      // let command = new MotorsCommand(action.lmSpeed, action.rmSpeed);
+      // command.Execute();
       this.trexService.sendCommand(action.lmSpeed, action.rmSpeed);
     } else if (action.action == 'talk') {
       this.speechService.say('Hello');
