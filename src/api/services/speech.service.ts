@@ -1,3 +1,5 @@
+import { Log } from "./log";
+
 const picoSpeaker: any = require('pico-speaker');
 const picoConfig = {
    AUDIO_DEVICE: null,
@@ -20,6 +22,6 @@ export class SpeechService {
      */
     say(text: string) {
         picoSpeaker.init(picoConfig);
-        picoSpeaker.speak(text).then(() => console.log('speech finished'));        
+        picoSpeaker.speak(text).then(() => Log.info('RASPBERRY', 'Speech finished'));        
     }
 }

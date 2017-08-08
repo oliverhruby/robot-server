@@ -21,20 +21,16 @@ export class MessageSocket extends BaseSocket {
   onMessage(message: any) {
     super.onMessage(message);
 
+    let action = JSON.parse(message);
+
     // TODO: some command routing pattern?
-    if (message == 'forward') {
-      this.trexService.sendCommand(30, 30);
-    } else if (message == 'stop') {
-      this.trexService.sendCommand(0, 0);
-    } else if (message == 'left') {
-      this.trexService.sendCommand(30, 0);
-    } else if (message == 'right') {
-      this.trexService.sendCommand(0, 30);
-    } else if (message == 'talk') {
+    if (action.action == 'motors') {
+      this.trexService.sendCommand(action.lmSpeed, action.rmSpeed);
+    } else if (action.action == 'talk') {
       this.speechService.say('Hello');
-    } else if (message == 'status') {
+    } else if (action.action == 'status') {
       this.trexService.getStatus().then();
-    } else if (message == 'photo') {
+    } else if (action.action == 'photo') {
       CvService.readCamera();
     }
   }
