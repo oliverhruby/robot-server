@@ -9,7 +9,6 @@ import * as path from 'path';
 import * as sqlite3 from 'sqlite3';
 import * as ws from 'ws';
 import { Log } from './services/log';
-// import { TRexService } from './services/trex.service';
 // import { trexRouter } from './routes/trex';
 import { MessageSocket } from './sockets/message.socket';
 
@@ -77,10 +76,10 @@ export class Server {
       res.send('API works!');
     });
 
-    //this.app.get('/api/status', (req: Request, res: Response) => {
+    // this.app.get('/api/status', (req: Request, res: Response) => {
     //  let trexService = new TRexService();
     //  let status = trexService.getStatus().then(data => res.send(data));
-    //});
+    // });
 
     //this.app.get('/api/command', (req: Request, res: Response) => {
     //  let trexService = new TRexService();

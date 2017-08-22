@@ -59,7 +59,7 @@ export class TRexService {
             7,          // I²C address 0-127,
             0           // clock frequency – 0=100kHz 1=400kHz
         ], function (err: any) {
-            if(err) console.log(err);
+            if(err) Log.error("TRexService", err.message);
         });
     }
 

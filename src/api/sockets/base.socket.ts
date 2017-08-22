@@ -39,5 +39,12 @@ export abstract class BaseSocket {
         Log.info('SOCKET', 'Peer #' + this.clients + ' disconnected.');
         this.clients--;
     }
+
+    broadcast(message: string) {
+        this.socket.clients.forEach(client => {
+	    	client.send(message);
+    	});	
+    }
+    
 }
 

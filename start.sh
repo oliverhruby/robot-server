@@ -1,1 +1,1 @@
-node dist/api/server.js
+pm2 start dist/api/server.js -- --color
