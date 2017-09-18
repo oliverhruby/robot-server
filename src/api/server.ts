@@ -8,9 +8,9 @@ import * as os from 'os';
 import * as path from 'path';
 import * as sqlite3 from 'sqlite3';
 import * as ws from 'ws';
-import { Log } from './services/log';
+import { Log } from './services/Log';
 // import { trexRouter } from './routes/trex';
-import { MessageSocket } from './sockets/message.socket';
+import { MessageSocket } from './sockets/MessageSocket';
 
 /**
  * Backend server functionality wrapped as a class

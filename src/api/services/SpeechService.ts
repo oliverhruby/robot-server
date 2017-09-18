@@ -1,4 +1,4 @@
-import { Log } from "./log";
+import { Log } from './Log';
 
 const picoSpeaker: any = require('pico-speaker');
 const picoConfig = {

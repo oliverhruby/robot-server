@@ -7,7 +7,7 @@ import * as xmlbuilder from 'xmlbuilder';
 export class BingSpeechService {
 
     speak() {
-        let apiKey = "e2ac00eb19bf4e96a4c6b91fb4ead8ae";
+        let apiKey = 'e2ac00eb19bf4e96a4c6b91fb4ead8ae';
         let ssml_doc = xmlbuilder.create('speak')
             .att('version', '1.0')
             .att('xml:lang', 'en-us')
@@ -46,7 +46,7 @@ export class BingSpeechService {
                             console.log(err, resp.body);
                         } else {
                             try {
-                                console.log("looks ok so far");
+                                console.log('looks ok so far');
                                 // var reader = new wav.Reader();
                                 // reader.on('format', function (format) {
                                 //     reader.pipe(new Speaker(format));

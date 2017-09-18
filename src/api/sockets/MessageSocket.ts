@@ -1,14 +1,16 @@
 import * as child from 'child_process';
-import { BaseSocket } from './base.socket';
-import { Log } from '../services/log';
+import { BaseSocket } from './BaseSocket';
 import * as ws from 'ws';
 import { IncomingMessage } from 'http';
-import { TRexService } from "../services/trex.service";
-import { CvService } from "../services/cv.service";
-import { SpeechService } from '../services/speech.service';
-import { MotorsCommand } from '../commands/motors';
-import { CameraCommand } from '../commands/camera';
-import { BingSpeechService } from '../services/bing-speech';
+
+import { BingSpeechService } from '../services/BingSpeechService';
+import { CvService } from '../services/CvService';
+import { Log } from '../services/Log';
+import { SpeechService } from '../services/SpeechService';
+import { TRexService } from '../services/TRexService';
+
+import { MotorsCommand } from '../commands/MotorsCommand';
+import { CameraCommand } from '../commands/CameraCommand';
 
 /**
  * Socket controller for the main application chat

@@ -1,8 +1,8 @@
 import * as chalk from 'chalk';
 import * as url from 'url';
 import * as ws from 'ws';
-import { IncomingMessage } from "http";
-import { Log } from './../services/log';
+import { IncomingMessage } from 'http';
+import { Log } from './../services/Log';
 
 /**
  * Common logic for socket controllers
