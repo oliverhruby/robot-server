@@ -4,7 +4,7 @@ import * as ws from 'ws';
 import { IncomingMessage } from 'http';
 
 import { BingSpeechService } from '../services/BingSpeechService';
-import { CvService } from '../services/CvService';
+import { OpenCvService } from '../services/OpenCvService';
 import { Log } from '../services/Log';
 import { SpeechService } from '../services/SpeechService';
 import { TRexService } from '../services/TRexService';

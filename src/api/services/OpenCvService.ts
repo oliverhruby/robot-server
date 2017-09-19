@@ -3,7 +3,7 @@ const cv: any = require('opencv');
 /**
  * Helper for OpenCV functionality
  */
-export class CvService {
+export class OpenCvService {
 
   /**
    * Video test
