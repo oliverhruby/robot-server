@@ -5,6 +5,7 @@ import { IncomingMessage } from 'http';
 
 import { BingSpeechService } from '../services/BingSpeechService';
 import { OpenCvService } from '../services/OpenCvService';
+import { SerialPortService } from '../services/SerialPortService';
 import { Log } from '../services/Log';
 import { SpeechService } from '../services/SpeechService';
 import { TRexService } from '../services/TRexService';
@@ -20,6 +21,7 @@ export class MessageSocket extends BaseSocket {
   private trexService = new TRexService();
   private speechService = new SpeechService();
   private bingSpeechService = new BingSpeechService();
+  private serialPortService = new SerialPortService();
 
   constructor(config: any) {
     super(config);
