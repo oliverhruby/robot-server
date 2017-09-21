@@ -2,7 +2,6 @@ import { Log } from './Log';
 
 const picoSpeaker: any = require('pico-speaker');
 const picoConfig = {
-   AUDIO_DEVICE: null,
    LANGUAGE: 'en-US'
 };
 
