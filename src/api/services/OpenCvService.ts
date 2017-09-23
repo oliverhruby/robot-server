@@ -1,4 +1,5 @@
 const cv: any = require('opencv');
+import { Log } from '../services/Log';
 
 /**
  * Helper for OpenCV functionality
@@ -10,9 +11,15 @@ export class OpenCvService {
    */
   static readCamera() {
     let camera = new cv.VideoCapture(0);
-    camera.setWidth(320);
-    camera.setHeight(240);
-    console.log('OpenCV camera captured');
+    setInterval(function () {
+      camera.read(function (err: any, mat: Matrix) {
+        if (err) throw err;
+        Log.info('OpenCV', 'Reading camera at size ' + mat.size());
+        if (mat.size()[0] > 0 && mat.size()[1] > 0) {
+          if (err) throw err;
+        }
+      });
+    }, 500);
   }
 
   /**

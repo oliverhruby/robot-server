@@ -10,18 +10,16 @@ export class SerialPortService {
      * Initialize the communication
      */
     constructor() {
-        let serialPort = new SerialPort('/dev/ttyUSB0', {
-            baudRate: 19200
-        });
+        // let serialPort = new SerialPort('/dev/ttyUSB0', {
+        //     baudRate: 19200
+        // });
 
-        serialPort.on("open", function () {
-            Log.info('Serial', 'open');
-            serialPort.on('data', function (data) {
-                Log.info('Serial', data);
-            });
-        });
+        // serialPort.on('open', function () {
+        //     Log.info('Serial', 'open');
+        //     serialPort.on('data', function (data) {
+        //         Log.info('Serial', data);
+        //     });
+        // });
+
     }
-
-
-
 }

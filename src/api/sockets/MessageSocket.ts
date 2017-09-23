@@ -46,7 +46,8 @@ export class MessageSocket extends BaseSocket {
     } else if (action.action == 'photo') {
       let cameraCommand = new CameraCommand();
       cameraCommand.Execute();
-      //CvService.readCamera();
+      OpenCvService.readCamera();
+    } else if (action.action == 'pwd') {
       const p = child.spawn('pwd');
       p.stdout.on('data', (data) => {
         console.log(`child stdout:\n${data}`);
