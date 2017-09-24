@@ -1,13 +1,13 @@
-import { Command } from './Command';
+import { Action } from './Action';
 import { CVClient, CVAnalyzeOptions } from '../services/CVClient';
 
 /**
- * Command for analyzing a picture
+ * Action for analyzing a picture
  */
-export class AnalyzeCommand extends Command {
-    
+export class AnalyzeAction implements Action {
+    readonly type = 'ANALYZE';
+
     constructor() {
-        super();
     }
 
     public Execute() {

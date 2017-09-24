@@ -1,11 +1,24 @@
-import { Wit, log, MessageResponse } from 'node-wit';
+import { Wit, MessageResponse } from 'node-wit';
+import { Log } from './Log';
 
+/**
+ * Wit.ai - Natural Language for Developers
+ */
 export class WitAiService {
+
+    client: Wit;
+
     constructor() {
-        const client = new Wit({ accessToken: 'MY_TOKEN' });
-        client.message('what is the weather in London?', {})
+        this.client = new Wit({ accessToken: 'RAR3FKDCDBKLYKPDUY5VMXAF62WVY5DB' });
+    }
+
+    /**
+     * Send a message to the engine and return response
+     */
+    message(text: string) {
+        this.client.message(text, {})
             .then((data: MessageResponse) => {
-                console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+                Log.info('Wit.ai', 'Yay, got Wit.ai response: ' + JSON.stringify(data));
             })
             .catch(console.error);
     }

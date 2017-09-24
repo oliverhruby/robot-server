@@ -57,7 +57,7 @@ export class TRexService {
             0,           // Impact sensitivity high byte
             0,           // Impact sensitivity low byte
             2,           // lowbat high byte 5.5V => 550 => 0x226 => 2
-            38,          // lowbat low byte 5.5V => 550 => 0x226 => 38 
+            38,          // lowbat low byte 5.5V => 550 => 0x226 => 38
             7,           // I²C address 0-127,
             0            // clock frequency – 0=100kHz 1=400kHz
         ], function (err: any) {
@@ -87,7 +87,7 @@ export class TRexService {
                 if (err) {
                     Log.error('TRexService', err);
                 } else {
-                    let start = buffer[0]
+                    let start = buffer[0];
                     let error = buffer[1];
 
                     let status = new TRexStatus();

@@ -25,7 +25,7 @@ export class BingSpeechService {
                 'Ocp-Apim-Subscription-Key': apiKey
             }
         }, function (err, resp, access_token) {
-            if (err || resp.statusCode != 200) {
+            if (err || resp.statusCode !== 200) {
                 console.log(err, resp.body);
             } else {
                 try {
@@ -42,7 +42,7 @@ export class BingSpeechService {
                         },
                         encoding: null
                     }, function (err, resp, speak_data) {
-                        if (err || resp.statusCode != 200) {
+                        if (err || resp.statusCode !== 200) {
                             console.log(err, resp.body);
                         } else {
                             try {

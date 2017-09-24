@@ -42,9 +42,8 @@ export abstract class BaseSocket {
 
     broadcast(message: string) {
         this.socket.clients.forEach(client => {
-	    	client.send(message);
-    	});	
+            client.send(message);
+        });
     }
-    
-}
 
+}
